@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/loja.css">
+    <link rel="stylesheet" href="js/scripit.js">
+
+</head>
+
+<body>
+    <header class="topNav" id="mynav">
+        <a class="inicio" href="/index.html">
+            <img src="img/Logo.png" width="100px"> </a>
+        <div class="headerconteudo">
+            <a class="headerlink" href="../Site acampamento/index.html">inicio</a>
+            <a class="headerlink" href="../Site acampamento/cadastro.html">Cadastro</a>
+            <a class="headerlink" href="../Site acampamento/loja.html">Loja</a>
+            <a class="headerlink" href="../Site acampamento/sobrenos.html">Sobre nós</a>
+        </div>
+    </header>
+    <hr>
+
+    <div class="titulos">
+        <h2>Vitrine</h2>
+        <div id="produtos">
+
+
+        </div>
+        <h2>Carrinho</h2>
+        <div id="carrinho">
+        </div>
+
+    </div>
+    <script>
+        const items = [{
+                id: 0,
+                nome: "Barraca Camuflada Albatroz - 1 pessoa R$150,00",
+                img: "https://a-static.mlcdn.com.br/800x560/barraca-acampamento-para-1-pessoa-ao-ar-livre-camuflada-albatroz/pesquefacil/6303277/dcb9da2c5eb6873d9217435666cb3c81.jpg",
+                quantidade: 0
+            }, {
+                id: 1,
+                nome: "Bússola Moscopass 3L R$350,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/69c986f1090d520849cf56b7f48e08aeawsaccesskeyidakiatclmsgfx4j7tu445expires1656513743signatureugjg8b0vwi1bpv1bp2f2f6rxlavms3d-b9ab3967aa5861eca516539217484175-640-0.",
+                quantidade: 0
+            }, {
+                id: 2,
+                nome: "Canivete Invictus R$120,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/14821915895-phanton-1-f08cfad1aa6786954916462290195051-640-0.jpg",
+                quantidade: 0
+            }, {
+                id: 3,
+                nome: "Mochila Acampar 20L R$300,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/15094306259-mg-9971-b4cd9b1cb033d22d9f16360523400159-640-0.jpg",
+                quantidade: 0
+            }, {
+                id: 4,
+                nome: "Colete Acampar Aventura R$200,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/84aedd33bb681210bfccea258aff1876awsaccesskeyidakiatclmsgfx4g7qtfvdexpires1650119494signature58q2bsfafyyv6sam7ofo52bctrdto3d-605913c9e923e5f13a16475275100043-640-0.",
+                quantidade: 0
+            }, {
+                id: 5,
+                nome: "Mochila Acampar Marumbi 45L R$500,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/15094302563-mg-1181-bb377414b30bec24ba16360506589216-640-0.jpg",
+                quantidade: 0
+            }, {
+                id: 6,
+                nome: "Lenha para fogueira R$40,00",
+                img: "https://cdn.leroymerlin.com.br/products/lenha_para_lareira_12kg_86701111_9811_600x600.jpeg",
+                quantidade: 0
+            }, {
+                id: 7,
+                nome: "Barraca para 6 pessoas R$540,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/14558039840-barraca-panda-6-000-155154-7896558435073-01-9e0fff8a873053fe7416343110555988-640-0.jpg",
+                quantidade: 0
+            }, {
+                id: 8,
+                nome: "Barraca para 9 pessoas R$1945,00",
+                img: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/700/265/products/14823478852-barraca-laredo-8-9-000-151280-7896558431334-01-54d1c3ca08524f440e16390562492778-640-0.jpg",
+                quantidade: 0
+            }
+
+        ]
+        inicializarloja = () => {
+            var containerProdutos = document.getElementById("produtos");
+            items.map((val) => {
+                containerProdutos.innerHTML += `
+                <div class="produto-single">
+                    <img src="` + val.img + `"/>
+                    <p>` + val.nome + `</p>
+                    <a key="` + val.id + `"href="#">Adicionar ao carrinho!</a>
+                    
+                </div>
+                `;
+
+            })
+        }
+
+        inicializarloja();
+
+        atualizarCarrinho = () => {
+            var containerCarrinho = document.getElementById("carrinho");
+            containerCarrinho.innerHTML = "";
+            items.map((val) => {
+                if (val.quantidade > 0) {
+                    containerCarrinho.innerHTML += `
+                <div class="info-single-checkout">
+                <p style="float:left;">Produto: ` + val.nome + ` </p>
+                <p style="float:right;">Quantiade: ` + val.quantidade + ` </p>
+                <div style="clear:both"></div>
+        
+                </div>
+                `;
+                }
+
+            })
+        }
+
+        var links = document.getElementsByTagName("a");
+
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function() {
+                let key = this.getAttribute("key");
+                items[key].quantidade++;
+                atualizarCarrinho();
+                return false;
+            })
+        }
+    </script>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <footer>
+        <div class="wrapper">
+            <div class="footer-box">
+                <div class="company-footer">
+                    <h2>Camping SC</h2>
+                    <p>Barracas de acampamento</p>
+                    <p>Os melhores lugares </p>
+                    <p>Com o melhor preço e acessibilidade</p>
+                    <p>As melhores recomendações para o seu acampamento perfeito</p>
+                </div>
+            </div>
+            <div class="footer-box">
+                <div class="estilos-footer">
+                    <h2>Atendimento</h2>
+                    <br>
+                    <p>Segunda a sexta</p>
+
+                    <p>7:20 as 18:00</p>
+
+                    <p>Feriados abrimos 12:00 </p>
+
+                    <p></p>
+                    <br>
+                    <h2>Localização</h2>
+                    <br>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.2515578661555!2d-48.65409828533163!3d-26.895510398963992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8cc16e5d1182d%3A0xd776116c223fd52e!2sR.%20Secret%C3%A1rio%20Jos%C3%A9%20Schubert%20J%C3%BAnior%2C%20845%20-%20Centro%2C%20Navegantes%20-%20SC%2C%2088370-388!5e0!3m2!1spt-BR!2sbr!4v1654689597151!5m2!1spt-BR!2sbr"
+                        width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="footer-box">
+                <h2>Nos encontre nas redes sociais </h2>
+                <br>
+                <ul class="footer-list">
+                    <li>
+                        <a href="https://instagram.com/maateusinhoo_?igshid=YmMyMTA2M2Y=">
+                            <img class="insta" src="img/insta.webp" alt="">
+                            <span>Instagram</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://api.whatsapp.com/send?phone=5547999165879&text=Atendimento%20das%207%3A20%20as%2018%3A30%2C%20aos%20feriados%20trabalhamos%20apartir%20da%2012%3A00%20horas">
+                            <img class="insta" src="img/whatsapp-logo-1.png" alt="">
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=100006445920189">
+                            <img class="insta" src="img/facebook_logos_PNG19757.png" alt="">
+                            <span>Facebook</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+</body>
+
+
+</html>
